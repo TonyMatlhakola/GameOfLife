@@ -18,7 +18,7 @@ namespace GameOfLife.Uitls
                 Heigth = Convert.ToInt32(configuration["GameOfLifeSettings:Heigth"]),
                 Width = Convert.ToInt32(configuration["GameOfLifeSettings:Width"]),
                 MaxRuns = Convert.ToUInt32(configuration["GameOfLifeSettings:NumberOfGenerations"]),
-                SleepTime = Convert.ToInt32(configuration["GameOfLifeSettings:sleepTime"])
+                SleepTime = Convert.ToInt32(configuration["GameOfLifeSettings:SleepTime"])
             };
             return settings;
 

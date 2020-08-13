@@ -13,25 +13,19 @@ namespace GameOfLife
 
         private static void Main(string[] args)
         {
-
             // DI/Ioc register dependencies
-           var _serviceProvider = DependencyInjection.ConfigureIoCc();
-           
+           var _serviceProvider = DependencyInjection.ConfigureIoCc();           
             
             //Get app settings
             var _appSettings = ConfigurationSettings.GetConfiurationSettings();            
 
-            //Begin Game
-            int runs = 0;
-          
+            //Begin Game of Life 
+            int runs = 0;          
             while (runs++ < _appSettings.MaxRuns)
             {
                 _serviceProvider.Resolve<IGameOfLifeService>().DrawAndGrow();
                 System.Threading.Thread.Sleep(_appSettings.SleepTime);
             }
-
-
         }
-
     }
 }
