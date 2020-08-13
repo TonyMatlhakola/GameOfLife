@@ -1,6 +1,6 @@
 # GameOfLife
 
-#Please add values in the appSettings.json file to resize the board or increase the 
+#Please add values in the appSettings.json file to resize the board or increase generations
 
 #appSettings.json file body:
 
