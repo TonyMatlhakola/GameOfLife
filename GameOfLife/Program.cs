@@ -1,31 +1,37 @@
-﻿using System;
-
+﻿using Autofac;
+using GameOfLife.Ioc;
+using GameOfLife.Uitls;
+using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GameOfLife
 {
-    
+
 
     internal class Program
-    {
-
-        // Constants for the game rules.
-        private const int Heigth = 10;
-        private const int Width = 50;
-        private const uint MaxRuns = 100;
+    {      
 
         private static void Main(string[] args)
         {
+
+            // DI/Ioc register dependencies
+           var _serviceProvider = DependencyInjection.ConfigureIoCc();
+           
+            
+            //Get app settings
+            var _appSettings = ConfigurationSettings.GetConfiurationSettings();            
+
+            //Begin Game
             int runs = 0;
-            var sim = new GameOfLifeService(Heigth, Width);
-
-            while (runs++ < MaxRuns)
+          
+            while (runs++ < _appSettings.MaxRuns)
             {
-                sim.DrawAndGrow();
-
-                // Give the user a chance to view the game in a more reasonable speed.
-                System.Threading.Thread.Sleep(100);
+                _serviceProvider.Resolve<IGameOfLifeService>().DrawAndGrow();
+                System.Threading.Thread.Sleep(_appSettings.SleepTime);
             }
-            Console.ReadKey();
+
+
         }
+
     }
 }

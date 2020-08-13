@@ -1,41 +1,37 @@
-﻿using System;
+﻿using GameOfLife.Uitls;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GameOfLife
 {
-    public  class GameOfLifeService
+    public class GameOfLifeService : IGameOfLifeService
     {
-            private int Heigth;
-            private int Width;
-            private bool[,] cells;
+        private int Heigth;
+        private int Width;
+        private bool[,] cells;
 
-            /// <summary>
-            /// Initializes a new Game of Life.
-            /// </summary>
-            /// <param name="Heigth">Heigth of the cell field.</param>
-            /// <param name="Width">Width of the cell field.</param>
-
-            public GameOfLifeService(int Heigth, int Width)
-            {
-                this.Heigth = Heigth;
-                this.Width = Width;
-                cells = new bool[Heigth, Width];
-                GenerateField();
-            }
-
-            /// <summary>
-            /// Advances the game by one generation and prints the current state to console.
-            /// </summary>
+        // Initializes a new Game of Life.          
+        public GameOfLifeService()
+        {
+            //Get app settings
+            var _appSettings = ConfigurationSettings.GetConfiurationSettings();
+            this.Heigth = _appSettings.Heigth;
+            this.Width = _appSettings.Width;
+            cells = new bool[_appSettings.Heigth, _appSettings.Width];
+            GenerateField();
+        } 
+            //  Advances the game by one generation and prints the current state to console.
+   
             public void DrawAndGrow()
             {
                 DrawGame();
                 Grow();
             }
 
-            /// <summary>
-            /// Advances the game by one generation according to GoL's ruleset.
-            /// </summary>
+
+            // Advances the game by one generation according to GoL's ruleset.
+   
 
             private void Grow()
             {
@@ -68,12 +64,9 @@ namespace GameOfLife
                 }
             }
 
-            /// <summary>
-            /// Checks how many alive neighbors are in the vicinity of a cell.
-            /// </summary>
-            /// <param name="x">X-coordinate of the cell.</param>
-            /// <param name="y">Y-coordinate of the cell.</param>
-            /// <returns>The number of alive neighbors.</returns>
+    
+            // Checks how many alive neighbors are in the vicinity of a cell.
+        
 
             private int GetNeighbors(int x, int y)
             {
@@ -92,9 +85,9 @@ namespace GameOfLife
                 return NumOfAliveNeighbors;
             }
 
-            /// <summary>
-            /// Draws the game to the console.
-            /// </summary>
+        
+            // Draws the game to the console.
+           
 
             private void DrawGame()
             {
@@ -109,9 +102,9 @@ namespace GameOfLife
                 Console.SetCursorPosition(0, Console.WindowTop);
             }
 
-            /// <summary>
-            /// Initializes the field with random boolean values.
-            /// </summary>
+          
+            // Initializes the field with random boolean values.
+          
 
             private void GenerateField()
             {
